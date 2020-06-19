@@ -12,6 +12,7 @@ import {
 import {Surface} from "react-native-paper";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import Player from "../screens/Player";
+import { useNavigation } from '@react-navigation/native';
 
 
 
@@ -21,6 +22,11 @@ const {width, height} = Dimensions.get("window");
 class ReadingComponent extends Component {
     constructor(props: any) {
         super(props);
+
+    }
+
+    redirectTo(screenName: any) {
+        useNavigation().navigate(`${screenName}`);
     }
     
     render() {
@@ -78,7 +84,8 @@ class ReadingComponent extends Component {
                     showsVerticalScrollIndicator={false}
                     renderItem = {({item, index}) => {
                         return (
-                        <TouchableOpacity>
+                        <TouchableOpacity 
+                            onPress={() => this.redirectTo(item.screenName)}>
                         <Surface style={styles.surface}>
                             <ImageBackground
                             source={item.img} 
